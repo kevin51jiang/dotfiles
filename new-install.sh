@@ -37,6 +37,8 @@ git config --global user.email kevin51jiang@email.com
 brew install --cask 1password
 # Git fork
 # brew install --cask fork
+# Linear App
+brew install --cask linear-linear
 
 
 #################################
