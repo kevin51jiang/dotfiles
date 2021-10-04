@@ -59,3 +59,4 @@ brew install thefuck
 # Todo after
 # For VS Code and VS Code Insiders, open the Command Palette via (F1 or ⇧⌘P) and type shell command to find the Shell Command:
 # > Shell Command: Install 'code' command in PATH
+# Install https://github.com/emreyolcu/discrete-scroll
