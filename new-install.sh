@@ -55,6 +55,13 @@ brew install git-lfs
 
 brew install thefuck
 
+# Plant UML
+brew install libtool
+brew link libtool
+brew install graphviz
+brew link --overwrite graphviz
+
+
 
 # Todo after
 # For VS Code and VS Code Insiders, open the Command Palette via (F1 or ⇧⌘P) and type shell command to find the Shell Command:
