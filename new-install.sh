@@ -15,8 +15,23 @@ source ~/.zshrc
 git config --global user.name "Kevin Jiang"
 git config --global user.email kevin51jiang@email.com
 
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
 brew install rlwrap
+brew install pyenv
+
+# Append the following
+# echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+# echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+# echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+
+# Pipx for ansible
+brew install pipx
+pipx ensurepath
+sudo pipx ensurepath --global # optional to allow pipx actions with --global argument
+
+# pipx install --include-deps ansible
+# pipx inject --include-apps ansible argcomplete
 
 ####################################
 ## Closed source homebrew casks ####
@@ -47,7 +62,7 @@ brew install --cask unnaturalscrollwheels
 # Git fork
 # brew install --cask fork
 # Linear App
-# brew install --cask linear-linear
+brew install --cask linear-linear
 # Torguard VPN
 # brew install --cask torguard
 
@@ -56,7 +71,7 @@ brew install --cask unnaturalscrollwheels
 ### Dev stuff ig ################
 #################################
 # Node version management
-brew install nodenv
+brew install nvm
 
 brew install git-lfs
 
