@@ -20,6 +20,9 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 brew install rlwrap
 brew install pyenv
 
+# Disable bluetooth when laptop asleep
+brew install bluesnooze
+
 # Append the following
 # echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
 # echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
