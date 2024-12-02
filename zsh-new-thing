@@ -101,7 +101,6 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-eval "$(nodenv init -)"
 alias zedit="nano ~/.zshrc"
 alias zreal="source ~/.zshrc"
 alias zreload="source ~/.zshrc"
@@ -115,11 +114,19 @@ alias ys="yarn start"
 alias yys="yarn && yarn start"
 alias yl="yarn lint"
 
-# go dev
-alias rsa="configFile="resources/conf-local.yml" go run sapi/app/main.go | grep --color -E '===|ERROR|$'"
-alias gtd="go test -v ./..."
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completi$
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
-export PATH="/usr/local/opt/mongodb-community@4.0/bin:$PATH"
+# Created by `pipx` on 2024-10-08 01:14:15
+export PATH="$PATH:/Users/kjiang/.local/bin"
+
+# pnpm
+export PNPM_HOME="/Users/kjiang/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
 

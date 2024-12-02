@@ -47,6 +47,10 @@ brew install --cask google-chrome
 brew install --cask spotify
 # # Insomnia
 brew install --cask insomnia
+# Orbstack
+brew install --cask orbstack
+# Bruno
+brew install --cask bruno
 # # VSCode
 brew install --cask visual-studio-code
 # # iterm2
@@ -89,6 +93,11 @@ brew install libtool
 brew link libtool
 brew install graphviz
 brew link --overwrite graphviz
+
+
+
+# Create directories for recordings
+mkdir -p ~/Desktop/rec ~/Desktop/rec/error ~/Desktop/rec/output ~/Desktop/rec/raw
 
 
 
