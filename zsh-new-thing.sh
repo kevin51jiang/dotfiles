@@ -85,7 +85,7 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nano'
 else
-  export EDITOR='code'
+  export EDITOR='cursor --wait'
 fi
 
 # Compilation flags
@@ -100,24 +100,22 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
-# eval "$(nodenv init -)"
 alias zedit="nano ~/.zshrc"
 alias zreal="source ~/.zshrc"
 alias zreload="source ~/.zshrc"
 
-
 alias gcb="git checkout -b"
+alias gpnv="git push --no-verify"
 
 # Yarn dev
-alias y="yarn"
-alias ys="yarn start"
-alias yys="yarn && yarn start"
-alias yl="yarn lint"
+alias y="pnpm"
+alias ys="pnpm start"
+alias yys="pnpm i && pnpm start"
+alias yyd="pnpm i && pnpm dev"
+alias yl="pnpm lint"
 
-# Pyenv stuff
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
