@@ -1,14 +1,50 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
+# # Agent detection - only activate minimal mode for actual agents  
+# if [[ -n "$npm_config_yes" ]] || [[ -n "$CI" ]] || [[ "$-" != *i* ]]; then
+#   export AGENT_MODE=true
+# else
+#   export AGENT_MODE=false
+# fi
+
+export AGENT_MODE=false
+
+if [[ "$AGENT_MODE" == "true" ]]; then
+  POWERLEVEL9K_INSTANT_PROMPT=off
+  # Disable complex prompt features for AI agents
+  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
+  POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+  # Ensure non-interactive mode
+  export DEBIAN_FRONTEND=noninteractive
+  export NONINTERACTIVE=1
+fi
+
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+# Enable Powerlevel10k instant prompt only when not in agent mode
+# if [[ "$AGENT_MODE" != "true" ]] && [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+
+# Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
+# load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# Set Oh My Zsh theme conditionally - disable for agents only
+if [[ "$AGENT_MODE" == "true" ]]; then
+  ZSH_THEME=""  # Disable Powerlevel10k for agents
+else
+#  ZSH_THEME="powerlevel10k/powerlevel10k"
+  ZSH_THEME="robbyrussell"
+fi
+
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -47,12 +83,12 @@ ZSH_THEME="robbyrussell"
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -70,7 +106,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git encode64)
+plugins=(git urltools git-commit)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -82,18 +118,22 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nano'
-else
-  export EDITOR='cursor --wait'
-fi
+export EDITOR='nano'
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='nano'
+# else
+#   export EDITOR='cursor --wait'
+# fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# export ARCHFLAGS="-arch $(uname -m)"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# plugins, and themes. Aliases can be placed here, though Oh My Zsh
+# users are encouraged to define aliases within a top-level file in
+# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
@@ -106,6 +146,7 @@ alias zreload="source ~/.zshrc"
 
 alias gcb="git checkout -b"
 alias gpnv="git push --no-verify"
+alias gpfnv="git push --force --no-verify"
 
 # Yarn dev
 alias y="pnpm"
@@ -114,8 +155,63 @@ alias yys="pnpm i && pnpm start"
 alias yyd="pnpm i && pnpm dev"
 alias yl="pnpm lint"
 
+alias comdot="git add . && git commit -m \".\" && gpnv"
+
+# Hermit
+alias sba="source bin/activate-hermit"
+alias mras="mise r run --all-services --stripe"
+alias nukedb="mise r db:destroy && mise r db:create && mise r db:load"
+alias uprun="gcm && git pull && mras"
+
+# gt
+alias gtms="gt modify && gt submit -w"
+alias gtsw="gt submit -w"
+
+
+# terraform
+alias tf="terraform"
+
+
+# GIVE ME SCROLLBACK
+export HISTSIZE=99999999
+export SAVEHIST=HISTSIZE
+
+kkil() {
+  local pids=$(lsof -ti:3000)
+  if [ -n "$pids" ]; then
+    kill -9 $pids
+  else
+    echo "No process found on port 3000"
+  fi
+}
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
+
+
+# Later in your .zshrc - minimal prompt for agents
+if [[ "$AGENT_MODE" == "true" ]]; then
+  PROMPT='%n@%m:%~%# '
+  RPROMPT=''
+  unsetopt CORRECT
+  unsetopt CORRECT_ALL
+  setopt NO_BEEP
+  setopt NO_HIST_BEEP  
+  setopt NO_LIST_BEEP
+  
+  # Agent-friendly aliases to avoid interactive prompts
+  alias cp='cp -f' 
+  alias mv='mv -f'
+  alias npm='npm --no-fund --no-audit'
+  alias yarn='yarn --non-interactive'
+  alias pip='pip --quiet'
+  alias git='git -c advice.detachedHead=false'
+else
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+eval "$(mise activate zsh)"
