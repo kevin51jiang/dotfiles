@@ -45,8 +45,8 @@ brew install --cask google-chrome
 # brew install --cask slack
 # # Spotify
 brew install --cask spotify
-# # Insomnia
-brew install --cask insomnia
+# # Yaak
+brew install --cask yaak
 # Orbstack
 brew install --cask orbstack
 # Bruno
