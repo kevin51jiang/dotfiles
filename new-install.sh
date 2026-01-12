@@ -23,6 +23,7 @@ brew install pyenv
 # Disable bluetooth when laptop asleep
 brew install bluesnooze
 
+
 # Append the following
 # echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
 # echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
@@ -81,6 +82,8 @@ brew install --cask linear-linear
 brew install nvm
 
 brew install git-lfs
+
+brew install mise
 
 # After refresh
 
