@@ -61,6 +61,9 @@ brew install --cask rectangle
 # 7-zip for all your compression needs
 brew install sevenzip
 
+# No more itunes ty
+brew install --cask notunes
+
 # Allow mouse scroll to function normally
 brew install --cask unnaturalscrollwheels
 
