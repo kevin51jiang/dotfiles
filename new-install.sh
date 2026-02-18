@@ -60,6 +60,8 @@ brew install --cask iterm2
 brew install --cask rectangle
 # 7-zip for all your compression needs
 brew install sevenzip
+# we love gcloud
+brew install --cask gcloud-cli
 
 # No more itunes ty
 brew install --cask notunes
