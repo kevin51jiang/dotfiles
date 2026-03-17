@@ -1,24 +1,4 @@
 
-# # Agent detection - only activate minimal mode for actual agents  
-# if [[ -n "$npm_config_yes" ]] || [[ -n "$CI" ]] || [[ "$-" != *i* ]]; then
-#   export AGENT_MODE=true
-# else
-#   export AGENT_MODE=false
-# fi
-
-export AGENT_MODE=false
-
-if [[ "$AGENT_MODE" == "true" ]]; then
-  POWERLEVEL9K_INSTANT_PROMPT=off
-  # Disable complex prompt features for AI agents
-  POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
-  POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
-  # Ensure non-interactive mode
-  export DEBIAN_FRONTEND=noninteractive
-  export NONINTERACTIVE=1
-fi
-
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -37,13 +17,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# Set Oh My Zsh theme conditionally - disable for agents only
-if [[ "$AGENT_MODE" == "true" ]]; then
-  ZSH_THEME=""  # Disable Powerlevel10k for agents
-else
-#  ZSH_THEME="powerlevel10k/powerlevel10k"
-  ZSH_THEME="robbyrussell"
-fi
+ZSH_THEME="robbyrussell"
 
 
 # Set list of themes to pick from when loading at random
@@ -190,27 +164,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 
-
-# Later in your .zshrc - minimal prompt for agents
-if [[ "$AGENT_MODE" == "true" ]]; then
-  PROMPT='%n@%m:%~%# '
-  RPROMPT=''
-  unsetopt CORRECT
-  unsetopt CORRECT_ALL
-  setopt NO_BEEP
-  setopt NO_HIST_BEEP  
-  setopt NO_LIST_BEEP
-  
-  # Agent-friendly aliases to avoid interactive prompts
-  alias cp='cp -f' 
-  alias mv='mv -f'
-  alias npm='npm --no-fund --no-audit'
-  alias yarn='yarn --non-interactive'
-  alias pip='pip --quiet'
-  alias git='git -c advice.detachedHead=false'
-else
-  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-fi
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
 
