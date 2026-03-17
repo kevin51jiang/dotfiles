@@ -45,6 +45,8 @@ brew install bash
 ####################################
 # # Google Chrome
 brew install --cask google-chrome
+# Brave
+brew install --cask brave-browser
 # # Slack
 # brew install --cask slack
 # # Spotify
@@ -67,6 +69,8 @@ brew install --cask rectangle
 brew install sevenzip
 # we love gcloud
 brew install --cask gcloud-cli
+
+
 
 # spacewalker for virtual displays
 brew install --cask spacewalker
