@@ -128,6 +128,13 @@ brew install mas
 
 brew install git
 
+# stuff you'd need at some point or another
+brew install imagemagick
+brew install coreutils
+brew install unzip
+brew install curl
+brew install wget
+brew install util-linux
 
 # Openai codex
 brew install --cask codex
