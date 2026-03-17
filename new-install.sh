@@ -15,24 +15,27 @@ source ~/.zshrc
 git config --global user.name "Kevin Jiang"
 git config --global user.email kevin51jiang@email.com
 
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-
 brew install rlwrap
-brew install pyenv
+
+brew install uv
 
 # Disable bluetooth when laptop asleep
 brew install bluesnooze
 
+# macos comes with an outdate bash ewww
+brew install bash
 
-# Append the following
-# echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
-# echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
-# echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+# pyenv, if you feel like it
+# # Append the following
+# brew install pyenv
+# # echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+# # echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+# # echo 'eval "$(pyenv init -)"' >> ~/.zshrc
 
-# Pipx for ansible
-brew install pipx
-pipx ensurepath
-sudo pipx ensurepath --global # optional to allow pipx actions with --global argument
+# # Pipx for ansible
+# brew install pipx
+# pipx ensurepath
+# sudo pipx ensurepath --global # optional to allow pipx actions with --global argument
 
 # pipx install --include-deps ansible
 # pipx inject --include-apps ansible argcomplete
@@ -50,10 +53,12 @@ brew install --cask spotify
 brew install --cask yaak
 # Orbstack
 brew install --cask orbstack
-# Bruno
-brew install --cask bruno
 # # VSCode
 brew install --cask visual-studio-code
+# windsurf
+brew install --cask windsurf
+# antigravity
+brew install --cask antigravity
 # # iterm2
 brew install --cask iterm2
 # Rectangle for window management
@@ -62,6 +67,9 @@ brew install --cask rectangle
 brew install sevenzip
 # we love gcloud
 brew install --cask gcloud-cli
+
+# spacewalker for virtual displays
+brew install --cask spacewalker
 
 # No more itunes ty
 brew install --cask notunes
@@ -90,17 +98,47 @@ brew install git-lfs
 
 brew install mise
 
+brew install bat
+
+brew install ffmpeg
+
+brew install jq
+
+brew install go
+
+brew install nano
+
+brew install libvpx
+
+brew install ncdu
+
+brew install sqlite
+
+brew install ripgrep
+
+brew install bun
+
+brew install gh
+
+brew install mas
+
+brew install git
+
+
+# Openai codex
+brew install --cask codex
+brew install --cask codex-app
+
 # After refresh
 
-# brew install yarn
+corepack enable
 
-#brew install thefuck
 
-# Plant UML
-brew install libtool
-brew link libtool
-brew install graphviz
-brew link --overwrite graphviz
+# # Plant UML
+# brew install libtool
+# brew link libtool
+# brew install graphviz
+# brew link --overwrite graphviz
 
 
 
